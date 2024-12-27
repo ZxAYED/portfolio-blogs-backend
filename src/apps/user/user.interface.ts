@@ -3,7 +3,6 @@ export interface IUser {
     email: string,
     password: string,
     role: "admin" | "user",
-    isBlocked: boolean,
-    createdAt: Date,
-    updatedAt: Date,
+    isBlocked?: boolean,
+
 }
