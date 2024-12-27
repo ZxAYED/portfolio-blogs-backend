@@ -32,8 +32,20 @@ const getAllBlogsFromDb = async () => {
     const result = await blogModel.find().populate('author')
     return result
 }
+const updateblogsFromDb = async (id: string, payload: IBlog) => {
+
+    const result = await blogModel.findByIdAndUpdate(id, payload, { new: true, runValidators: true })
+    return result
+}
+const deleteblogsFromDb = async (id: string) => {
+
+    const result = await blogModel.deleteOne({ _id: id })
+    return result
+}
 
 export const blogService = {
     createBlogIntoDb,
-    getAllBlogsFromDb
+    getAllBlogsFromDb,
+    updateblogsFromDb,
+    deleteblogsFromDb
 }

@@ -11,8 +11,6 @@ const createBlogSchema = z.object({
 const updateBlogSchema = z.object({
     title: z.string().max(100, 'Title must be less than 100 characters').optional(),
     content: z.string().optional(),
-    author: z.string().refine(val => /^[a-f\d]{24}$/i.test(val), 'Author must be a valid ObjectId').optional(),
-    isPublished: z.boolean().optional()
 });
 
 export const blogValidation = { updateBlogSchema, createBlogSchema };
