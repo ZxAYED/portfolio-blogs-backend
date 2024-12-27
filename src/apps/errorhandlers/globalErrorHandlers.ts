@@ -10,7 +10,7 @@ import handleDuplicateError from "./duplicateError";
 
 
 
-const GlobalErrorHandlers = (err: unknown, req: Request, res: Response, next: NextFunction) => {
+const GlobalErrorHandlers = (err: unknown, req: Request, res: Response, next: NextFunction): Response<any, Record<string, any>> => {
     let ErrorSource = [
         {
             path: "",

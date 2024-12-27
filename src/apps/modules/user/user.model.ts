@@ -1,8 +1,8 @@
 import { model, Schema } from "mongoose";
 import { IUser } from "./user.interface";
 import bcrypt from 'bcryptjs'
-import AppError from "../Errorhandlers/AppError";
-import config from "../config";
+import AppError from "../../Errorhandlers/AppError";
+import config from "../../config";
 
 const userSchema = new Schema<IUser>({
     name: {

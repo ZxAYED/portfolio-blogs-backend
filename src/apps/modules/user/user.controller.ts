@@ -1,4 +1,4 @@
-import catchAsync from "../utils/catchAsync";
+import catchAsync from "../../utils/catchAsync";
 import { userService } from "./user.service";
 
 

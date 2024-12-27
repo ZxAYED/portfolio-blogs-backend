@@ -8,3 +8,5 @@ export interface IErrorResponse {
     statusCode: number,
     errorSource: IErrorSource[]
 }
+
+export type TRole = 'admin' | 'user'

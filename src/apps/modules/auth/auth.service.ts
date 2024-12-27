@@ -1,5 +1,5 @@
-import config from "../config";
-import AppError from "../errorhandlers/AppError";
+import config from "../../config";
+import AppError from "../../Errorhandlers/AppError";
 import { userModel } from "../user/user.model";
 import { ILogin } from "./auth.interface";
 import jwt from 'jsonwebtoken'
