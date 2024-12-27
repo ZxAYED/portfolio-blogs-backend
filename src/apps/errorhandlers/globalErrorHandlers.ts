@@ -1,7 +1,7 @@
 
 
 import { NextFunction, Request, Response } from "express";
-import handleZodError from "./ZodError";
+import handleZodError from "./zodError";
 import { ZodError } from "zod";
 import handleMongooseError from "./mongooseError";
 import handleCastError from "./castError";
@@ -62,7 +62,7 @@ const GlobalErrorHandlers = (err: unknown, req: Request, res: Response, next: Ne
         message,
         statusCode,
 
-        ErrorSource
+        stack: ErrorSource
 
     })
 

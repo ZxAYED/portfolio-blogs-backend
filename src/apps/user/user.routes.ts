@@ -4,11 +4,7 @@ import { userController } from './user.controller';
 
 const router = express.Router()
 
-router.post('/register', userController.createUser)
-router.get('/register/:id', (req, res) => {
-    res.json({
-        "cholterase to": "ho mama"
-    })
-})
+
+router.get('/', userController.getAllUser)
 
 export const userRouter = router

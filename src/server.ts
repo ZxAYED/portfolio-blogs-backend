@@ -31,6 +31,7 @@ process.on('unhandledRejection', () => {
     }
     process.exit(1)
 })
+
 process.on('uncaughtException', () => {
     console.log("uncaughtException occured, server is down");
     if (server) {
