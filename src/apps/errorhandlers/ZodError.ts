@@ -1,20 +1,19 @@
-import { ZodError, ZodIssue } from "zod";
-import { IErrorResponse, IErrorSource } from "./error.interface";
+import { ZodError, ZodIssue } from 'zod'
+import { IErrorResponse, IErrorSource } from './error.interface'
 
 const handleZodError = (err: ZodError): IErrorResponse => {
-    const errorSource: IErrorSource[] = err.issues.map((issue: ZodIssue) => {
-        return {
-            path: issue?.path[issue.path.length - 1],
-            message: issue.message
-        }
-    })
-
-    const statusCode = 400
+  const errorSource: IErrorSource[] = err.issues.map((issue: ZodIssue) => {
     return {
-        statusCode,
-        message: "Zod Validation Error",
-        errorSource
+      path: issue?.path[issue.path.length - 1],
+      message: issue.message,
     }
+  })
 
+  const statusCode = 400
+  return {
+    statusCode,
+    message: 'Zod Validation Error',
+    errorSource,
+  }
 }
 export default handleZodError
