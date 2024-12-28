@@ -1,6 +1,6 @@
 import { IErrorResponse, IErrorSource } from './error.interface'
 
-const handleDuplicateError = (err: unknown): IErrorResponse => {
+const handleDuplicateError = (err: any): IErrorResponse => {
   const match = err.message.match(/"([^"]*)"/)
   const msg = match && match[1]
   const errorSource: IErrorSource[] = [
@@ -12,7 +12,7 @@ const handleDuplicateError = (err: unknown): IErrorResponse => {
   const statusCode = 400
   return {
     statusCode,
-    // eslint-disable-next-line no-constant-binary-expression
+
     message: `${msg} is already exits` || 'Duplicate entry found',
     errorSource,
   }

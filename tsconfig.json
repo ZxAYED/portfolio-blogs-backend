@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "typeRoots": ["./node_modules/@types", "./src"],
+    "typeRoots": ["./node_modules/@types", "./src/types"],
     "target": "ES6",
     "module": "commonjs",
     "strict": true,
@@ -11,9 +11,8 @@
     "rootDir": "./src",
     "resolveJsonModule": true,
     "moduleResolution": "node",
-
     "types": ["node", "estree", "json-schema"]
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/types/**/*.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

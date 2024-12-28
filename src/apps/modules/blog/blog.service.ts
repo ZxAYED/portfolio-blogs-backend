@@ -1,5 +1,6 @@
 import config from '../../config'
 import AppError from '../../Errorhandlers/AppError'
+import { IDecoded } from '../../Errorhandlers/error.interface'
 import QueryBuilder from '../../middleWares/QueryBuilder'
 import { userModel } from '../user/user.model'
 import { IBlog, IQuery } from './blog.interface'

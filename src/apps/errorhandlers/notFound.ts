@@ -1,12 +1,15 @@
-import { NextFunction, Request, Response } from 'express'
+import express, { Request, Response, NextFunction } from 'express';
 
 const notFound = (
   req: Request,
   res: Response,
-  next: NextFunction,
-): Response<any, Record<string, any>> => {
-  return res.status(500).json({
-    error: 'Resource not found',
-  })
+  next: NextFunction
+): Response<any, Record<string, any>> | void => {
+  return res.status(404).json({
+    success: false,
+    message: 'Resource not found',
+    statusCode: 404,
+  });
 }
-export default notFound
+
+export default notFound as unknown as express.RequestHandler;

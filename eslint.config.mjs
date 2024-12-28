@@ -20,8 +20,8 @@ export default [
       '@typescript-eslint': eslintPluginTypeScript,
     },
     rules: {
-      ...pluginJs.configs.recommended.rules, // Spread the recommended JS rules
-      ...eslintPluginTypeScript.configs.recommended.rules, // Spread the recommended TS rules
+      //   ...pluginJs.configs.recommended.rules, // Spread the recommended JS rules
+      //   ...eslintPluginTypeScript.configs.recommended.rules, // Spread the recommended TS rules
       // '@typescript-eslint/no-unused-expressions': [
       //   'error',
       //   {

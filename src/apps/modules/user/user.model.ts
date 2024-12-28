@@ -41,7 +41,7 @@ userSchema.pre('save', async function (next) {
     throw new AppError(401, 'User already exists')
   }
   const user = this
-  const salt = await bcrypt.genSalt(parseInt(config.gen_salt, 10))
+  const salt = await bcrypt.genSalt(parseInt(config.gen_salt as string, 10))
 
   user.password = await bcrypt.hash(user.password, salt)
 

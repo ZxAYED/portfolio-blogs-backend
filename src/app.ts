@@ -21,6 +21,8 @@ app.get('/', (req, res) => {
   res.send(' Why are u running? SO you are gay ? Then WHOs gay')
 })
 
-app.use(GlobalErrorHandlers)
+
 app.use(notFound)
+app.use(GlobalErrorHandlers as express.ErrorRequestHandler)
+
 export default app
