@@ -29,6 +29,7 @@ const auth = (...requiredRoles: TRole[]) => {
             throw new AppError(401, 'You are not Authorized')
         }
         req.user = decoded as JwtPayload
+
         next()
     })
 

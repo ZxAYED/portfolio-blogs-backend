@@ -9,11 +9,12 @@ import { blogValidation } from './blog.validation';
 const router = express.Router()
 
 
-router.post('/', validateRequest(blogValidation.createBlogSchema), auth('user'), blogController.createBlog)
+router.post('/', validateRequest(blogValidation.createBlogSchema), auth('user', 'admin'), blogController.createBlog)
 
 router.get('/', blogController.getAllBlogs)
-router.patch('/:id', auth('user'), validateRequest(blogValidation.updateBlogSchema), blogController.updateblogs)
 
-router.delete('/:id', auth('user'), blogController.deleteblog)
+router.patch('/:id', auth('user', 'admin'), validateRequest(blogValidation.updateBlogSchema), blogController.updateblogs)
+
+router.delete('/:id', auth('user', 'admin'), blogController.deleteblog)
 
 export const blogRoutes = router

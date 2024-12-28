@@ -37,13 +37,12 @@ const getAllBlogsFromDb = async (query: IQuery) => {
     // filter sort search
     const searchableFields = ["title", "content"]
 
-    const blogsQuery = new QueryBuilder(blogModel.find().populate('author'), query)
+    const blogsQuery = new QueryBuilder(blogModel.find().populate('author')
+        , query)
         .search(searchableFields)
         .filter()
         .sort()
         .pagination()
-
-
 
 
     const result = await blogsQuery.QueryModel
