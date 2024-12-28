@@ -6,6 +6,6 @@ import auth from '../../middleWares/auth';
 const router = express.Router()
 
 
-router.get('/', auth('any'), userController.getAllUser)
+router.get('/', auth('admin'), userController.getAllUser)
 
 export const userRouter = router

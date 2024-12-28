@@ -39,17 +39,12 @@ userSchema.pre('save', async function (next) {
     if (isUserExists) {
         throw new AppError(401, "User already exists")
     }
+    const user = this
+    const salt = await bcrypt.genSalt(parseInt(config.gen_salt, 10));
 
-    bcrypt.genSalt(Number(config.gen_salt), (err, salt) => {
-        if (err) return next(err);
+    user.password = await bcrypt.hash(user.password, salt);
 
-        bcrypt.hash(this.password, salt, (err, hash) => {
-            if (err) return next(err);
-
-            this.password = hash;
-            next();
-        });
-    });
+    next()
 })
 
 userSchema.set('toJSON', {

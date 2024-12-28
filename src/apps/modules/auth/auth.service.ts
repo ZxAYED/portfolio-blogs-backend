@@ -3,6 +3,7 @@ import AppError from "../../Errorhandlers/AppError";
 import { userModel } from "../user/user.model";
 import { ILogin } from "./auth.interface";
 import jwt from 'jsonwebtoken'
+import bcrypt from 'bcryptjs';
 
 
 
@@ -16,7 +17,11 @@ const loginUserIntoDb = async (payload: ILogin) => {
     if (isUserExists.isBlocked) {
         throw new AppError(404, "User not found")
     }
-    if (isUserExists.password !== payload.password) {
+
+    const isPasswordMactched = await bcrypt.compare(payload.password, isUserExists.password);
+
+
+    if (!isPasswordMactched) {
         throw new AppError(401, "Wrong Password")
     }
 

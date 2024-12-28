@@ -1,10 +1,12 @@
 
 import config from "../../config";
 import AppError from "../../Errorhandlers/AppError";
+import QueryBuilder from "../../middleWares/QueryBuilder";
 import { userModel } from "../user/user.model";
-import { IBlog } from "./blog.interface";
+import { IBlog, IQuery } from "./blog.interface";
 import { blogModel } from "./blog.model";
 import jwt, { JwtPayload } from 'jsonwebtoken';
+import AppError from './../../Errorhandlers/AppError';
 
 const createBlogIntoDb = async (tokens: string, payload: IBlog) => {
 
@@ -21,15 +23,31 @@ const createBlogIntoDb = async (tokens: string, payload: IBlog) => {
     if (isUserExists.isBlocked) {
         throw new AppError(400, 'User not found')
     }
-
+    if (typeof payload.content !== 'string') {
+        throw new AppError(400, " Content must be  string ")
+    }
     payload.author = isUserExists._id
 
     const result = await blogModel.create(payload)
     return result
 }
 
-const getAllBlogsFromDb = async () => {
-    const result = await blogModel.find().populate('author')
+const getAllBlogsFromDb = async (query: IQuery) => {
+
+    // filter sort search
+    const searchableFields = ["title", "content"]
+
+    const blogsQuery = new QueryBuilder(blogModel.find().populate('author'), query)
+        .search(searchableFields)
+        .filter()
+        .sort()
+        .pagination()
+
+
+
+
+    const result = await blogsQuery.QueryModel
+
     return result
 }
 const updateblogsFromDb = async (id: string, payload: IBlog) => {

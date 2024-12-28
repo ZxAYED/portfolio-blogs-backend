@@ -14,10 +14,10 @@ const createBlog = catchAsync(async (req, res) => {
 })
 
 const getAllBlogs = catchAsync(async (req, res) => {
-    const result = await blogService.getAllBlogsFromDb()
+    const result = await blogService.getAllBlogsFromDb(req.query)
     res.json({
         success: true,
-        message: 'Blogs retrieved successfully',
+        message: 'Blogs are retrieved successfully',
         statusCode: 200,
         data: result
     })
@@ -35,7 +35,7 @@ const deleteblog = catchAsync(async (req, res) => {
     const result = await blogService.deleteblogsFromDb(req.params.id)
     res.json({
         success: true,
-        message: 'Blog updated successfully',
+        message: 'Blog Deleted successfully',
         statusCode: 200,
         data: result
     })

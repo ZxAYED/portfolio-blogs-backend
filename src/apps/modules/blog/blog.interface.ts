@@ -7,3 +7,11 @@ export interface IBlog {
     isPublished: boolean,
 
 }
+export interface IQuery {
+    search?: string;
+    sortBy?: string;
+    sortOrder?: 'asc' | 'desc';
+    limit?: number;
+    page?: number;
+    [key: string]: any;
+}
