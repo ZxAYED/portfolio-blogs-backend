@@ -1,3 +1,4 @@
+import { JwtPayload } from "jsonwebtoken"
 
 export interface IErrorResponse {
   message: string
@@ -22,4 +23,8 @@ export interface CustomError {
 export interface IErrorSource {
   path: string;
   message: string;
+}
+export interface CustomRequest extends Request {
+  user?: JwtPayload,
+  headers: any
 }

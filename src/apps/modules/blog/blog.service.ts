@@ -8,11 +8,13 @@ import { blogModel } from './blog.model'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 
 
+
 const createBlogIntoDb = async (tokens: string, payload: IBlog) => {
   const token = tokens.split(' ')[1]
 
-  const decoded = jwt.verify(token, config.secret as string)
-  const { userEmail } = decoded?.data as JwtPayload
+  const { userEmail } = jwt.verify(token, config.secret as string) as JwtPayload
+
+
 
   const isUserExists = await userModel.findOne({ email: userEmail })
 

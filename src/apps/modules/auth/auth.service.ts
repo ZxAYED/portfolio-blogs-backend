@@ -25,8 +25,8 @@ const loginUserIntoDb = async (payload: ILogin) => {
   }
 
   const jwtPayload = {
-    userEmail: isUserExists.email,
-    role: isUserExists.role,
+    userEmail: isUserExists?.email as string,
+    role: isUserExists?.role,
   }
 
   const accessToken = jwt.sign(
