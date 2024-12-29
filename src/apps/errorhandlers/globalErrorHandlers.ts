@@ -45,7 +45,7 @@ const GlobalErrorHandlers = (
     const simplifiedError = handleZodError(err);
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
-    // ErrorSource = simplifiedError.errorSource;
+    ErrorSource = simplifiedError.errorSource;
   } else if (isValidationError(err)) {
     const simplifiedError = handleMongooseError(err);
     statusCode = simplifiedError.statusCode;
