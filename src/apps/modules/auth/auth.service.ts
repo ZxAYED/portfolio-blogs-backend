@@ -29,7 +29,7 @@ const loginUserIntoDb = async (payload: ILogin) => {
     role: isUserExists?.role,
   }
 
-  const accessToken = jwt.sign(
+  const token = jwt.sign(
     {
       data: jwtPayload,
     },
@@ -38,7 +38,7 @@ const loginUserIntoDb = async (payload: ILogin) => {
   )
 
   return {
-    accessToken,
+    token,
   }
 }
 export const authService = {

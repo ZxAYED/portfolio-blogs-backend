@@ -12,11 +12,13 @@ import jwt, { JwtPayload } from 'jsonwebtoken'
 const createBlogIntoDb = async (tokens: string, payload: IBlog) => {
   const token = tokens.split(' ')[1]
 
-  const { userEmail } = jwt.verify(token, config.secret as string) as JwtPayload
+  const data = jwt.verify(token, config.secret as string) as JwtPayload
 
+  const { userEmail } = data.data
 
 
   const isUserExists = await userModel.findOne({ email: userEmail })
+
 
   if (!isUserExists) {
     throw new AppError(400, 'User not found')

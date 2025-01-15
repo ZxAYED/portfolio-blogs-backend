@@ -1,0 +1,309 @@
+{
+	"info": {
+		"_postman_id": "f0aca8fe-181d-4120-97dc-0e2e57fa71bc",
+		"name": "Echoes Of The Mind",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39781146"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"admin\"\r\n  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local-url}}/auth/register",
+							"host": [
+								"{{local-url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"email\": \"admin0@admin.com\",\r\n  \"password\": \"admin111\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local-url}}/auth/login",
+							"host": [
+								"{{local-url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJFbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJ1c2VyIn0sImlhdCI6MTczNTM3NDA4OCwiZXhwIjoxNzM1Mzc3Njg4fQ.GHiNoCMTXpHhxpwXUmAxAWcSwECVVBT_15bhwGOJvBA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local-url}}/user",
+							"host": [
+								"{{local-url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "blogs",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJFbWFpbCI6ImFkbWluMEBhZG1pbi5jb20iLCJyb2xlIjoidXNlciJ9LCJpYXQiOjE3MzU0MDI4OTUsImV4cCI6MTczNTQwNjQ5NX0.bitw1EPc_h8UvnzfNkod8BWmQbiUlB5SymwDPjju7sc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Introduction to Node.js\",\r\n    \"content\": \"Node.js is a runtime environment that allows you to run JavaScript on the server. It's built on the V8 engine and provides a rich library of modules to build scalable network applications...\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local-url}}/blogs",
+							"host": [
+								"{{local-url}}"
+							],
+							"path": [
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getALl",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJFbWFpbCI6InpheWVkQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIifSwiaWF0IjoxNzM1MzY5MzMzLCJleHAiOjE3MzUzNzI5MzN9.KK-2Iz-QNLJVrc1neP4x0HBkLX9WD_SJQbkfTipmmms",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local-url}}/blogs",
+							"host": [
+								"{{local-url}}"
+							],
+							"path": [
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJFbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJyb2xlIjoidXNlciJ9LCJpYXQiOjE3MzUzMjM1NjYsImV4cCI6MTczNTMyNzE2Nn0._NIyeIEo86kKFTPEh3gMaCBsFfZ-ph4yvULjoFExdK8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"seasdasdasdasdx\",\r\n    \"content\": \"Promises in JavaScript are used to handle asynchronous operations...\"\r\n  \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/blogs/676ef6d18e85547146c56615",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"blogs",
+								"676ef6d18e85547146c56615"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJFbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJyb2xlIjoidXNlciJ9LCJpYXQiOjE3MzUzMjM1NjYsImV4cCI6MTczNTMyNzE2Nn0._NIyeIEo86kKFTPEh3gMaCBsFfZ-ph4yvULjoFExdK8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"seasdasdasdasdx\",\r\n    \"content\": \"Promises in JavaScript are used to handle asynchronous operations...\"\r\n  \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/blogs/676ef6d18e85547146c56615",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"blogs",
+								"676ef6d18e85547146c56615"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admn",
+			"item": [
+				{
+					"name": "createAdmin",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJFbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJ1c2VyIn0sImlhdCI6MTczNTM3NDA4OCwiZXhwIjoxNzM1Mzc3Njg4fQ.GHiNoCMTXpHhxpwXUmAxAWcSwECVVBT_15bhwGOJvBA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local-url}}/auth/admin/",
+							"host": [
+								"{{local-url}}"
+							],
+							"path": [
+								"auth",
+								"admin",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "block user",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJFbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJ1c2VyIn0sImlhdCI6MTczNTM3NDA4OCwiZXhwIjoxNzM1Mzc3Njg4fQ.GHiNoCMTXpHhxpwXUmAxAWcSwECVVBT_15bhwGOJvBA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local-url}}/auth/admin/",
+							"host": [
+								"{{local-url}}"
+							],
+							"path": [
+								"auth",
+								"admin",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete blog",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJFbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE3MzUzNzQ0NTQsImV4cCI6MTczNTM3ODA1NH0.yRqhfnhQAzWlqZj2RM7mvxEFXL5onLc0n-8eB3kw230",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local-url}}/admin/blogs/676f928111f20c9750dc169a",
+							"host": [
+								"{{local-url}}"
+							],
+							"path": [
+								"admin",
+								"blogs",
+								"676f928111f20c9750dc169a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -46,7 +46,7 @@ class QueryBuilder<T> {
       }
       sort = sortOrder === 'desc' ? `-${this.query?.sortBy}` : `${this.query?.sortBy}`
     }
-    console.log(sort);
+
     this.QueryModel = this.QueryModel.sort(sort).select('-__V')
     return this
   }

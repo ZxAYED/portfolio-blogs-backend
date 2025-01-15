@@ -4,7 +4,7 @@ import auth from '../../middleWares/auth'
 
 const router = express.Router()
 
-router.patch('/:id', auth('user'), adminController.createAdmin)
+router.patch('/:id', auth('admin'), adminController.createAdmin)
 
 router.patch('/users/:userId/block', auth('admin'), adminController.blockUser)
 

@@ -25,7 +25,7 @@ const deleteBlog = catchAsync(async (req, res) => {
 
   res.json({
     success: true,
-    message: 'blog has been blocked successfully',
+    message: 'Blog has been blocked successfully',
     statusCode: 200,
     data: result,
   })

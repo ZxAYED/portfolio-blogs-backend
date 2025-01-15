@@ -21,7 +21,7 @@ const auth = (...requiredRoles: TRole[]) => {
 
     const userEmail = decoded.data?.userEmail;
     const role = decoded.data?.role;
-    console.log(decoded);
+
 
     const isUserExists = await userModel.findOne({ email: userEmail });
 
