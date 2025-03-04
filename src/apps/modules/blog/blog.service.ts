@@ -1,57 +1,26 @@
-import config from '../../config'
-import AppError from '../../Errorhandlers/AppError'
-import { IDecoded } from '../../Errorhandlers/error.interface'
-import QueryBuilder from '../../middleWares/QueryBuilder'
-import { userModel } from '../user/user.model'
-import { IBlog, IQuery } from './blog.interface'
-import { blogModel } from './blog.model'
-import jwt, { JwtPayload } from 'jsonwebtoken'
+import UploadImageToCloudinary from '../../middleWares/uploadImageToCloudinary';
+import { IBlog } from './blog.interface';
+import { blogModel } from './blog.model';
 
 
 
-const createBlogIntoDb = async (tokens: string, payload: IBlog) => {
-  const token = tokens.split(' ')[1]
+const createBlogIntoDb = async (file: any, payload: IBlog) => {
+  if (file) {
+    const imageName = `${payload?.title}+${Date.now()}`;
+    const path = file?.buffer;
+    const uploadResponse = await UploadImageToCloudinary(imageName, path);
+    payload.imageUrl = uploadResponse.url;
 
-  const data = jwt.verify(token, config.secret as string) as JwtPayload
-
-  const { userEmail } = data.data
-
-
-  const isUserExists = await userModel.findOne({ email: userEmail })
-
-
-  if (!isUserExists) {
-    throw new AppError(400, 'User not found')
   }
-  if (isUserExists.isBlocked) {
-    throw new AppError(400, 'User not found')
-  }
-  if (typeof payload.content !== 'string') {
-    throw new AppError(400, ' Content must be  string ')
-  }
-  payload.author = isUserExists._id
-
   const result = await blogModel.create(payload)
   return result
 }
 
-const getAllBlogsFromDb = async (query: IQuery) => {
-  // filter sort search
-  const searchableFields = ['title', 'content']
-
-  const blogsQuery = new QueryBuilder(
-    blogModel.find().populate('author'),
-    query,
-  )
-    .search(searchableFields)
-    .filter()
-    .sort()
-    .pagination()
-
-  const result = await blogsQuery.QueryModel
-
+const getAllBlogsFromDb = async () => {
+  const result = await blogModel.find()
   return result
 }
+
 const updateblogsFromDb = async (id: string, payload: IBlog) => {
   const result = await blogModel.findByIdAndUpdate(id, payload, {
     new: true,

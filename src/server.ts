@@ -1,8 +1,8 @@
-import app from './app'
-import mongoose from 'mongoose'
-const port = 5000
 import { Server } from 'http'
+import mongoose from 'mongoose'
+import app from './app'
 import config from './apps/config'
+const port = 5000
 
 let server: Server
 
@@ -12,7 +12,7 @@ async function main() {
     console.log('Connected to the database')
 
     server = app.listen(config.port, () => {
-      console.log(`Example app listening on port ${config.port}`)
+      console.log(`Echos of the mind app listening on port ${config.port}`)
     })
     return server
   } catch (error) {

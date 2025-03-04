@@ -1,5 +1,5 @@
 import AppError from '../../Errorhandlers/AppError'
-import { blogModel } from '../blog/blog.model'
+import { blogModel } from '../project/project.model'
 import { userModel } from '../user/user.model'
 
 const createAdminFromDb = async (payload: string) => {

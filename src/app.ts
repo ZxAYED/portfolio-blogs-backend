@@ -1,12 +1,13 @@
-import express from 'express'
 import cors from 'cors'
-import { userRouter } from './apps/modules/user/user.routes'
+import express from 'express'
 import GlobalErrorHandlers from './apps/Errorhandlers/globalErrorHandlers'
+import { userRouter } from './apps/modules/user/user.routes'
 
-import { authRouter } from './apps/modules/auth/auth.routes'
-import { blogRoutes } from './apps/modules/blog/blog.routes'
 import notFound from './apps/Errorhandlers/notFound'
 import { adminRouter } from './apps/modules/admin/admin.routes'
+import { authRouter } from './apps/modules/auth/auth.routes'
+import { blogRoutes } from './apps/modules/blog/blog.routes'
+
 
 const app = express()
 app.use(cors())

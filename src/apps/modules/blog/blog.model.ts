@@ -16,6 +16,10 @@ const blogSchema = new Schema<IBlog>(
       required: true,
       ref: 'User',
     },
+    imageUrl: {
+      type: String,
+      required: true,
+    },
     isPublished: {
       type: Boolean,
       default: true,

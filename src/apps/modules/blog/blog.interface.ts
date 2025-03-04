@@ -5,6 +5,7 @@ export interface IBlog {
   content: string
   author: Types.ObjectId
   isPublished: boolean
+  imageUrl: string
 }
 export interface IQuery {
   search?: string

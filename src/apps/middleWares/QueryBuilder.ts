@@ -1,6 +1,6 @@
 import { Query } from 'mongoose'
 import AppError from '../Errorhandlers/AppError'
-import { IQuery } from '../modules/blog/blog.interface'
+import { IQuery } from '../modules/project/project.interface'
 
 class QueryBuilder<T> {
   public QueryModel: Query<T[], T>

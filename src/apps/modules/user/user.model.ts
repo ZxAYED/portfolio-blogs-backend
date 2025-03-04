@@ -1,8 +1,8 @@
-import { model, Schema } from 'mongoose'
-import { IUser } from './user.interface'
 import bcrypt from 'bcryptjs'
+import { model, Schema } from 'mongoose'
 import AppError from '../../Errorhandlers/AppError'
 import config from '../../config'
+import { IUser } from './user.interface'
 
 const userSchema = new Schema<IUser>(
   {
@@ -21,7 +21,6 @@ const userSchema = new Schema<IUser>(
     },
     role: {
       type: String,
-      enum: ['admin', 'user'],
       default: 'user',
     },
 

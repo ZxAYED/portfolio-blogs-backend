@@ -1,9 +1,10 @@
-import catchAsync from '../../utils/catchAsync'
-import { blogService } from './blog.service'
+import catchAsync from '../../utils/catchAsync';
+import { blogService } from './blog.service';
+
 
 const createBlog = catchAsync(async (req, res) => {
   const result = await blogService.createBlogIntoDb(
-    req.headers.authorization as string,
+    req.file,
     req.body,
   )
   res.json({
@@ -15,7 +16,7 @@ const createBlog = catchAsync(async (req, res) => {
 })
 
 const getAllBlogs = catchAsync(async (req, res) => {
-  const result = await blogService.getAllBlogsFromDb(req.query)
+  const result = await blogService.getAllBlogsFromDb()
   res.json({
     success: true,
     message: 'Blogs are retrieved successfully',
