@@ -1,7 +1,6 @@
 import express from 'express'
 
 import AppError from '../../Errorhandlers/AppError'
-import auth from '../../middleWares/auth'
 import validateRequest from '../../middleWares/validateRequest'
 import upload from '../../utils/multer.config'
 import { blogController } from './blog.controller'
@@ -24,19 +23,20 @@ router.post(
     next();
   },
   validateRequest(blogValidation.createBlogSchema),
-  auth('user'),
+
   blogController.createBlog,
 )
 
 router.get('/', blogController.getAllBlogs)
+router.get('/:id', blogController.getSingleBlog)
 
 router.patch(
   '/:id',
-  auth('user'),
+
   validateRequest(blogValidation.updateBlogSchema),
   blogController.updateblogs,
 )
 
-router.delete('/:id', auth('user'), blogController.deleteblog)
+router.delete('/:id', blogController.deleteblog)
 
 export const blogRoutes = router

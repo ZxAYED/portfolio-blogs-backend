@@ -1,8 +1,5 @@
-import bcrypt from 'bcryptjs'
 import { model, Schema } from 'mongoose'
-import AppError from '../../Errorhandlers/AppError'
-import config from '../../config'
-import { IUser } from './user.interface'
+import { IContact, IUser } from './user.interface'
 
 const userSchema = new Schema<IUser>(
   {
@@ -33,31 +30,22 @@ const userSchema = new Schema<IUser>(
     timestamps: true,
   },
 )
-
-userSchema.pre('save', async function (next) {
-  const isUserExists = await userModel.findOne({ email: this.email })
-  if (isUserExists) {
-    throw new AppError(401, 'User already exists')
-  }
-  const user = this
-  const salt = await bcrypt.genSalt(parseInt(config.gen_salt as string, 10))
-
-  user.password = await bcrypt.hash(user.password, salt)
-
-  next()
-})
-
-userSchema.set('toJSON', {
-  transform: function (doc, ret) {
-    delete ret.password
-    return ret
+const contactSchema = new Schema<IContact>({
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  message: {
+    type: String,
+    required: true,
   },
 })
-userSchema.set('toObject', {
-  transform: function (doc, ret) {
-    delete ret.password
-    return ret
-  },
-})
+
+
 
 export const userModel = model<IUser>('User', userSchema)
+export const contactModel = model<IContact>('Contact', contactSchema)

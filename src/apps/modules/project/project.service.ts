@@ -1,4 +1,5 @@
-import UploadImageToCloudinary from '../../middleWares/uploadImageToCloudinary';
+
+import UploadImageToCloudinary from '../../utils/UploadImageToCloudinary';
 import { IProject } from './project.interface';
 import ProjectModel from './project.model';
 
@@ -21,6 +22,10 @@ const getAllProjectsFromDb = async () => {
   const result = await ProjectModel.find()
   return result
 }
+const getSingleProjectsFromDb = async (id: string) => {
+  const result = await ProjectModel.findById(id)
+  return result
+}
 
 const updateProjectsFromDb = async (id: string, payload: IProject) => {
   const result = await ProjectModel.findByIdAndUpdate(id, payload, {
@@ -37,6 +42,7 @@ const deleteProjectsFromDb = async (id: string) => {
 export const ProjectService = {
   createProjectIntoDb,
   getAllProjectsFromDb,
+  getSingleProjectsFromDb,
   updateProjectsFromDb,
   deleteProjectsFromDb,
 }

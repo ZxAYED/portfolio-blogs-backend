@@ -24,6 +24,16 @@ const getAllBlogs = catchAsync(async (req, res) => {
     data: result,
   })
 })
+
+const getSingleBlog = catchAsync(async (req, res) => {
+  const result = await blogService.getSingleBlogsFromDb(req.params.id)
+  res.json({
+    success: true,
+    message: 'Blog has been retrieved successfully',
+    statusCode: 200,
+    data: result,
+  })
+})
 const updateblogs = catchAsync(async (req, res) => {
   const result = await blogService.updateblogsFromDb(req.params.id, req.body)
   res.json({
@@ -46,6 +56,7 @@ const deleteblog = catchAsync(async (req, res) => {
 export const blogController = {
   createBlog,
   getAllBlogs,
-  updateblogs,
+  updateblogs, getSingleBlog,
+
   deleteblog,
 }

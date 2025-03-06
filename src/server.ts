@@ -12,7 +12,7 @@ async function main() {
     console.log('Connected to the database')
 
     server = app.listen(config.port, () => {
-      console.log(`Echos of the mind app listening on port ${config.port}`)
+      console.log(`Portfolio blogs app listening on port ${config.port}`)
     })
     return server
   } catch (error) {

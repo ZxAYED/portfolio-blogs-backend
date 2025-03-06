@@ -5,3 +5,8 @@ export interface IUser {
   role: 'user'
   isBlocked?: boolean
 }
+export interface IContact {
+  name: string
+  email: string
+  message: string
+}

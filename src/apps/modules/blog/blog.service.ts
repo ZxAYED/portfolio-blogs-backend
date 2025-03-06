@@ -1,4 +1,5 @@
-import UploadImageToCloudinary from '../../middleWares/uploadImageToCloudinary';
+
+import UploadImageToCloudinary from '../../utils/uploadImageToCloudinary';
 import { IBlog } from './blog.interface';
 import { blogModel } from './blog.model';
 
@@ -18,6 +19,14 @@ const createBlogIntoDb = async (file: any, payload: IBlog) => {
 
 const getAllBlogsFromDb = async () => {
   const result = await blogModel.find()
+
+  return result
+}
+const getSingleBlogsFromDb = async (id: string) => {
+
+
+  const result = await blogModel.findById(id)
+
   return result
 }
 
@@ -36,6 +45,6 @@ const deleteblogsFromDb = async (id: string) => {
 export const blogService = {
   createBlogIntoDb,
   getAllBlogsFromDb,
-  updateblogsFromDb,
+  updateblogsFromDb, getSingleBlogsFromDb,
   deleteblogsFromDb,
 }

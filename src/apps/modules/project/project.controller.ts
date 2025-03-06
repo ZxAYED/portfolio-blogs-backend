@@ -1,4 +1,4 @@
-import '../../types/express';
+
 import catchAsync from '../../utils/catchAsync';
 import { ProjectService } from './project.service';
 
@@ -26,6 +26,16 @@ const getAllProjects = catchAsync(async (req, res) => {
     data: result,
   })
 })
+const getSingleProjects = catchAsync(async (req, res) => {
+  const result = await ProjectService.getSingleProjectsFromDb(req.params.id)
+
+  res.json({
+    success: true,
+    message: 'Project  retrieved successfully',
+    statusCode: 200,
+    data: result,
+  })
+})
 const updateProjects = catchAsync(async (req, res) => {
   const result = await ProjectService.updateProjectsFromDb(req.params.id, req.body)
   res.json({
@@ -48,6 +58,7 @@ const deleteProject = catchAsync(async (req, res) => {
 export const projectController = {
   createProject,
   getAllProjects,
+  getSingleProjects,
   updateProjects,
   deleteProject,
 }
