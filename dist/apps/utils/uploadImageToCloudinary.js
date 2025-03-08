@@ -21,6 +21,7 @@ cloudinary_1.default.v2.config({
     api_key: config_1.default.cloudinary_api_key,
     api_secret: config_1.default.cloudinary_api_secret,
 });
+// sadasd
 const UploadImageToCloudinary = (imageName, fileBuffer) => __awaiter(void 0, void 0, void 0, function* () {
     return new Promise((resolve, reject) => {
         const uploadStream = cloudinary_1.default.v2.uploader.upload_stream({ public_id: imageName.trim() }, (error, result) => {
