@@ -3,10 +3,11 @@ import { userController } from './user.controller'
 
 const router = express.Router()
 
-router.get('/', userController.getAllUser)
-router.post('/', userController.getAllUser)
+router.post('/', userController.createUser)
 router.post('/contact', userController.createContact)
+router.get('/', userController.getAllUser)
 router.get('/contact', userController.getAllContact)
 router.delete('/contact/:id', userController.deleteContact)
+router.delete('/:id', userController.deleteUser)
 
 export const userRouter = router

@@ -28,6 +28,15 @@ const deleteContact = catchAsync(async (req, res) => {
     data: result,
   })
 })
+const deleteUser = catchAsync(async (req, res) => {
+  const result = await userService.deleteUserIntoDb(req.params.id)
+  res.json({
+    success: true,
+    message: 'User deleted successfully',
+    statusCode: 200,
+    data: result,
+  })
+})
 const getAllUser = catchAsync(async (req, res) => {
   const result = await userService.getAllUsersFromDb()
   res.json({
@@ -48,6 +57,6 @@ const getAllContact = catchAsync(async (req, res) => {
 })
 
 export const userController = {
-  createUser,
+  createUser, deleteUser,
   getAllUser, createContact, deleteContact, getAllContact
 }

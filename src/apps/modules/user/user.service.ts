@@ -5,6 +5,11 @@ const createUserIntoDb = async (payload: IUser) => {
   const result = await userModel.create(payload)
   return result
 }
+const deleteUserIntoDb = async (payload: string) => {
+  const result = await userModel.findByIdAndDelete(payload)
+
+  return result
+}
 const contactIntoDb = async (payload: IContact) => {
   const result = await contactModel.create(payload)
   return result
@@ -16,7 +21,6 @@ const contactDeleteIntoDb = async (payload: string) => {
 
 const getAllUsersFromDb = async () => {
   const result = await userModel.find()
-
   return result
 }
 
@@ -27,6 +31,6 @@ const getAllContactFromDb = async () => {
 }
 
 export const userService = {
-  createUserIntoDb, contactIntoDb,
+  createUserIntoDb, contactIntoDb, deleteUserIntoDb,
   getAllUsersFromDb, contactDeleteIntoDb, getAllContactFromDb
 }

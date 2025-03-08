@@ -8,15 +8,9 @@ const createUserValidationSchema = z.object({
   email: z
     .string()
   ,
-  password: z
+  image: z
     .string()
-    .regex(
-      /^[a-zA-Z0-9!@#$%^&*]{6,}$/,
-      'Password must contain at least 6 characters, including letters, numbers, and symbols',
-    ),
-  role: z.string().optional(),
 
-  isBlocked: z.boolean().default(false),
 })
 
 const updateUserValidationSchema = z.object({
@@ -29,16 +23,11 @@ const updateUserValidationSchema = z.object({
     .string()
 
     .optional(),
-  password: z
+  image: z
     .string()
-    .regex(
-      /^[a-zA-Z0-9!@#$%^&*]{6,}$/,
-      'Password must contain at least 6 characters, including letters, numbers, and symbols',
-    )
+
     .optional(),
-  role: z.string().optional(),
-  status: z.enum(['active', 'blocked']).default('active').optional(),
-  isBlocked: z.boolean().default(false).optional(),
+
 })
 export const userValidationSchema = {
   createUserValidationSchema,

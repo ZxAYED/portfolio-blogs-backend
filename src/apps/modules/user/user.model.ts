@@ -12,19 +12,11 @@ const userSchema = new Schema<IUser>(
       required: true,
       unique: true,
     },
-    password: {
+    image: {
       type: String,
       required: true,
     },
-    role: {
-      type: String,
-      default: 'user',
-    },
 
-    isBlocked: {
-      type: Boolean,
-      default: false,
-    },
   },
   {
     timestamps: true,
