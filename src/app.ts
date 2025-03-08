@@ -16,7 +16,6 @@ app.use(express.json())
 
 app.use('/api/user', userRouter)
 app.use('/api/blogs', blogRoutes)
-
 app.use('/api/projects', ProjectRoutes)
 
 app.get('/', (req, res) => {
