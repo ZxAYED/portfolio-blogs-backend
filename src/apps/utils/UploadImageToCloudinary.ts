@@ -1,7 +1,5 @@
 
 import cloudinary from 'cloudinary';
-
-
 import { Readable } from 'stream';
 import config from '../config';
 import AppError from '../Errorhandlers/AppError';
