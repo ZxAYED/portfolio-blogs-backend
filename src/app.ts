@@ -9,7 +9,7 @@ import { userRouter } from './apps/modules/user/user.routes'
 
 const app = express()
 app.use(cors({
-  origin: ['http://localhost:3000', "https://portfolio-blogs-backend-x2xj.onrender.com"]
+  origin: ['http://localhost:3000', "https://next-portfolio-personal-blog-frontend.vercel.app"]
 }));
 app.use(express.json())
 
