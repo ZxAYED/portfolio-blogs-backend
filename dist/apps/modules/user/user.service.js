@@ -15,11 +15,27 @@ const createUserIntoDb = (payload) => __awaiter(void 0, void 0, void 0, function
     const result = yield user_model_1.userModel.create(payload);
     return result;
 });
-const getAllUserFromDb = () => __awaiter(void 0, void 0, void 0, function* () {
+const deleteUserIntoDb = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_model_1.userModel.findByIdAndDelete(payload);
+    return result;
+});
+const contactIntoDb = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_model_1.contactModel.create(payload);
+    return result;
+});
+const contactDeleteIntoDb = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_model_1.contactModel.findByIdAndDelete(payload);
+    return result;
+});
+const getAllUsersFromDb = () => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.userModel.find();
     return result;
 });
+const getAllContactFromDb = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_model_1.contactModel.find();
+    return result;
+});
 exports.userService = {
-    createUserIntoDb,
-    getAllUserFromDb,
+    createUserIntoDb, contactIntoDb, deleteUserIntoDb,
+    getAllUsersFromDb, contactDeleteIntoDb, getAllContactFromDb
 };

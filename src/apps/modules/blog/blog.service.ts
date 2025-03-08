@@ -1,5 +1,6 @@
 
-import UploadImageToCloudinary from '../../utils/uploadImageToCloudinary';
+
+import UploadImageToCloudinary from '../../utils/UploadImageToCloudinary';
 import { IBlog } from './blog.interface';
 import { blogModel } from './blog.model';
 

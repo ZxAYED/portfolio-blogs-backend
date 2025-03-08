@@ -12,41 +12,42 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.blogService = void 0;
+exports.ProjectService = void 0;
 const UploadImageToCloudinary_1 = __importDefault(require("../../utils/UploadImageToCloudinary"));
-const blog_model_1 = require("./blog.model");
-const createBlogIntoDb = (file, payload) => __awaiter(void 0, void 0, void 0, function* () {
+const project_model_1 = __importDefault(require("./project.model"));
+const createProjectIntoDb = (file, payload) => __awaiter(void 0, void 0, void 0, function* () {
     if (file) {
-        const imageName = `${payload === null || payload === void 0 ? void 0 : payload.title}+${Date.now()}`;
+        const imageName = `${payload === null || payload === void 0 ? void 0 : payload.projectName}+${Date.now()}`;
         const path = file === null || file === void 0 ? void 0 : file.buffer;
         const uploadResponse = yield (0, UploadImageToCloudinary_1.default)(imageName, path);
         payload.imageUrl = uploadResponse.url;
     }
-    const result = yield blog_model_1.blogModel.create(payload);
+    const result = yield project_model_1.default.create(payload);
     return result;
 });
-const getAllBlogsFromDb = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield blog_model_1.blogModel.find();
+const getAllProjectsFromDb = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield project_model_1.default.find();
     return result;
 });
-const getSingleBlogsFromDb = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield blog_model_1.blogModel.findById(id);
+const getSingleProjectsFromDb = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield project_model_1.default.findById(id);
     return result;
 });
-const updateblogsFromDb = (id, payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield blog_model_1.blogModel.findByIdAndUpdate(id, payload, {
+const updateProjectsFromDb = (id, payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield project_model_1.default.findByIdAndUpdate(id, payload, {
         new: true,
         runValidators: true,
     });
     return result;
 });
-const deleteblogsFromDb = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield blog_model_1.blogModel.deleteOne({ _id: id });
+const deleteProjectsFromDb = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield project_model_1.default.findByIdAndDelete(id);
     return result;
 });
-exports.blogService = {
-    createBlogIntoDb,
-    getAllBlogsFromDb,
-    updateblogsFromDb, getSingleBlogsFromDb,
-    deleteblogsFromDb,
+exports.ProjectService = {
+    createProjectIntoDb,
+    getAllProjectsFromDb,
+    getSingleProjectsFromDb,
+    updateProjectsFromDb,
+    deleteProjectsFromDb,
 };

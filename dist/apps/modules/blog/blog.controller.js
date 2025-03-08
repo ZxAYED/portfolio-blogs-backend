@@ -16,7 +16,7 @@ exports.blogController = void 0;
 const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
 const blog_service_1 = require("./blog.service");
 const createBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield blog_service_1.blogService.createBlogIntoDb(req.headers.authorization, req.body);
+    const result = yield blog_service_1.blogService.createBlogIntoDb(req.file, req.body);
     res.json({
         success: true,
         message: 'Blog created successfully',
@@ -25,10 +25,19 @@ const createBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
     });
 }));
 const getAllBlogs = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield blog_service_1.blogService.getAllBlogsFromDb(req.query);
+    const result = yield blog_service_1.blogService.getAllBlogsFromDb();
     res.json({
         success: true,
         message: 'Blogs are retrieved successfully',
+        statusCode: 200,
+        data: result,
+    });
+}));
+const getSingleBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield blog_service_1.blogService.getSingleBlogsFromDb(req.params.id);
+    res.json({
+        success: true,
+        message: 'Blog has been retrieved successfully',
         statusCode: 200,
         data: result,
     });
@@ -54,6 +63,6 @@ const deleteblog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
 exports.blogController = {
     createBlog,
     getAllBlogs,
-    updateblogs,
+    updateblogs, getSingleBlog,
     deleteblog,
 };

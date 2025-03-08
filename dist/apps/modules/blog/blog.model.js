@@ -12,9 +12,12 @@ const blogSchema = new mongoose_1.Schema({
         required: true,
     },
     author: {
-        type: mongoose_1.Schema.Types.ObjectId,
+        type: String,
         required: true,
-        ref: 'User',
+    },
+    imageUrl: {
+        type: String,
+        required: true,
     },
     isPublished: {
         type: Boolean,
@@ -22,33 +25,5 @@ const blogSchema = new mongoose_1.Schema({
     },
 }, {
     timestamps: true,
-});
-blogSchema.pre('aggregate', function (next) {
-    this.pipeline().unshift({
-        $lookup: {
-            from: 'User',
-            localField: 'author',
-            foreignField: '_id',
-            as: 'authorDetails',
-        },
-    }, {
-        $unwind: '$authorDetails',
-    }, {
-        $match: { 'authorDetails.isBlocked': false },
-    }, {
-        $project: {
-            title: 1,
-            content: 1,
-            author: {
-                _id: '$authorDetails._id',
-                name: '$authorDetails.username',
-                email: '$authorDetails.email',
-            },
-            createdAt: 1,
-            updatedAt: 1,
-        },
-    });
-    next();
-    console.log('prehook');
 });
 exports.blogModel = (0, mongoose_1.model)('Blog', blogSchema);
