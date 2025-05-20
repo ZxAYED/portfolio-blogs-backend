@@ -5,10 +5,13 @@ import { ProjectService } from './project.service';
 
 
 const createProject = catchAsync(async (req, res) => {
+  console.log("ei page a ashei na controller")
   const result = await ProjectService.createProjectIntoDb(
     req.file,
     req.body,
   )
+  console.log("🚀 ~ createProject controller ~ result:",  req.file,
+    req.body,)
   res.json({
     success: true,
     message: 'Project created successfully',
@@ -26,12 +29,14 @@ const getAllProjects = catchAsync(async (req, res) => {
     data: result,
   })
 })
-const getSingleProjects = catchAsync(async (req, res) => {
-  const result = await ProjectService.getSingleProjectsFromDb(req.params.id)
+const getSingleProject = catchAsync(async (req, res) => {
+  const result = await ProjectService.getSingleProjectFromDb(req.params.id)
+
+
 
   res.json({
     success: true,
-    message: 'Project  retrieved successfully',
+    message: 'Project retrieved successfully',
     statusCode: 200,
     data: result,
   })
@@ -58,7 +63,7 @@ const deleteProject = catchAsync(async (req, res) => {
 export const projectController = {
   createProject,
   getAllProjects,
-  getSingleProjects,
+  getSingleProject,
   updateProjects,
   deleteProject,
 }

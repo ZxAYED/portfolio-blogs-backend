@@ -9,7 +9,7 @@ cloudinary.v2.config({
     api_key: config.cloudinary_api_key,
     api_secret: config.cloudinary_api_secret,
 });
-// sadasd
+
 const UploadImageToCloudinary = async (imageName: string, fileBuffer: Buffer) => {
     return new Promise<{ message: string; url: string }>((resolve, reject) => {
         const uploadStream = cloudinary.v2.uploader.upload_stream(

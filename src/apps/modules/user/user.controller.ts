@@ -10,6 +10,16 @@ const createUser = catchAsync(async (req, res) => {
     data: result,
   })
 })
+
+const loginUser = catchAsync(async (req, res) => {
+  const result = await userService.loginUser(req.body)
+  res.json({
+    success: true,
+    message: 'User logged in successfully',
+    statusCode: 200,
+    data: result,
+  })
+})
 const createContact = catchAsync(async (req, res) => {
   const result = await userService.contactIntoDb(req.body)
   res.json({
@@ -58,5 +68,5 @@ const getAllContact = catchAsync(async (req, res) => {
 
 export const userController = {
   createUser, deleteUser,
-  getAllUser, createContact, deleteContact, getAllContact
+  getAllUser, createContact, deleteContact, getAllContact,loginUser
 }

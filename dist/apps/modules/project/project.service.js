@@ -26,10 +26,10 @@ const createProjectIntoDb = (file, payload) => __awaiter(void 0, void 0, void 0,
     return result;
 });
 const getAllProjectsFromDb = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield project_model_1.default.find();
+    const result = yield project_model_1.default.find().sort({ projectId: 1 });
     return result;
 });
-const getSingleProjectsFromDb = (id) => __awaiter(void 0, void 0, void 0, function* () {
+const getSingleProjectFromDb = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield project_model_1.default.findById(id);
     return result;
 });
@@ -42,12 +42,13 @@ const updateProjectsFromDb = (id, payload) => __awaiter(void 0, void 0, void 0, 
 });
 const deleteProjectsFromDb = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield project_model_1.default.findByIdAndDelete(id);
+    console.log("🚀 ~ deleteProjectsFromDb ~ result:", result);
     return result;
 });
 exports.ProjectService = {
     createProjectIntoDb,
     getAllProjectsFromDb,
-    getSingleProjectsFromDb,
+    getSingleProjectFromDb,
     updateProjectsFromDb,
     deleteProjectsFromDb,
 };

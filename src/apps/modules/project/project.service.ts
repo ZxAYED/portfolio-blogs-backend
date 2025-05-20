@@ -1,4 +1,5 @@
 
+import AppError from '../../Errorhandlers/AppError';
 import UploadImageToCloudinary from '../../utils/UploadImageToCloudinary';
 import { IProject } from './project.interface';
 import ProjectModel from './project.model';
@@ -19,11 +20,16 @@ const createProjectIntoDb = async (file: any, payload: IProject) => {
 }
 
 const getAllProjectsFromDb = async () => {
-  const result = await ProjectModel.find()
+  const result = await ProjectModel.find().sort({ projectId: 1 })
+  
+
   return result
 }
-const getSingleProjectsFromDb = async (id: string) => {
+const getSingleProjectFromDb = async (id: string) => {
+
+  
   const result = await ProjectModel.findById(id)
+  
   return result
 }
 
@@ -36,13 +42,14 @@ const updateProjectsFromDb = async (id: string, payload: IProject) => {
 }
 const deleteProjectsFromDb = async (id: string) => {
   const result = await ProjectModel.findByIdAndDelete(id)
+  console.log("🚀 ~ deleteProjectsFromDb ~ result:", result)
   return result
 }
 
 export const ProjectService = {
   createProjectIntoDb,
   getAllProjectsFromDb,
-  getSingleProjectsFromDb,
+  getSingleProjectFromDb,
   updateProjectsFromDb,
   deleteProjectsFromDb,
 }

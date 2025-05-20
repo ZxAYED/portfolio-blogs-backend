@@ -9,8 +9,10 @@ const createUserValidationSchema = zod_1.z.object({
         .max(50, 'Name must be at most 50 characters long'),
     email: zod_1.z
         .string(),
+    password: zod_1.z
+        .string(),
     image: zod_1.z
-        .string()
+        .string().optional()
 });
 const updateUserValidationSchema = zod_1.z.object({
     name: zod_1.z
@@ -24,6 +26,8 @@ const updateUserValidationSchema = zod_1.z.object({
     image: zod_1.z
         .string()
         .optional(),
+    password: zod_1.z
+        .string().optional(),
 });
 exports.userValidationSchema = {
     createUserValidationSchema,

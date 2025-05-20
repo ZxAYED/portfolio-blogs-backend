@@ -6,10 +6,12 @@ const createUserValidationSchema = z.object({
     .min(3, 'Name must be at least 3 characters long')
     .max(50, 'Name must be at most 50 characters long'),
   email: z
+    .string(),
+  password: z
     .string()
   ,
   image: z
-    .string()
+    .string().optional()
 
 })
 
@@ -27,6 +29,9 @@ const updateUserValidationSchema = z.object({
     .string()
 
     .optional(),
+      password: z
+    .string() .optional(),
+  
 
 })
 export const userValidationSchema = {

@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { NextFunction, Request, Response } from 'express'
 
 
 import validateRequest from '../../middleWares/validateRequest'
@@ -12,33 +12,34 @@ const router = express.Router()
 
 
 router.post(
-  '/', upload.single('imageUrl'),
-  (req, res, next) => {
-    if (!req.body || !req.file) {
-      return next(new AppError(400, 'Missing required fields or file'));
-    }
-    req.body.imageUrl = req.file;
-    next();
+  '/', upload.single('file'),
+ 
+  (req: Request, res: Response, next: NextFunction) => {
+    const parsedData = JSON.parse(req.body.data);
+    req.body = projectValidation.createProjectSchema.parse(parsedData);
+    console.log("🚀 ~ req.body:", req.body)
+    return projectController.createProject(req, res, next);
   },
-  validateRequest(projectValidation.createProjectSchema),
-
-  projectController.createProject,
 )
 
 router.get('/', projectController.getAllProjects)
-router.get('/:id', projectController.getSingleProjects)
+router.get('/:id', projectController.getSingleProject)
 
 router.patch(
   '/:id',
-  upload.single('imageUrl'),
+  upload.single('file'),
   (req, res, next) => {
     if (!req.body || !req.file) {
       return next(new AppError(400, 'Missing required fields or file'));
     }
-    req.body.imageUrl = req.file;
+
+
+    const parsedData = JSON.parse(req.body.data);
+    req.body = projectValidation.createProjectSchema.parse(parsedData)
+
     next();
   },
-  validateRequest(projectValidation.updateProjectSchema),
+
   projectController.updateProjects,
 )
 

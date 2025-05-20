@@ -8,9 +8,35 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userService = void 0;
 const user_model_1 = require("./user.model");
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const config_1 = __importDefault(require("../../config"));
+const AppError_1 = __importDefault(require("../../Errorhandlers/AppError"));
+const loginUser = (data) => __awaiter(void 0, void 0, void 0, function* () {
+    const email = data.email.toLowerCase();
+    const userData = yield user_model_1.userModel.findOne({ email });
+    if (!userData) {
+        throw new AppError_1.default(404, "User not found!");
+    }
+    if (data.password !== userData.password) {
+        throw new AppError_1.default(403, "You have given a wrong password!");
+    }
+    const tokenPayload = {
+        id: userData._id,
+        name: userData.name,
+        email: userData.email,
+        image: userData.image,
+    };
+    const accessToken = jsonwebtoken_1.default.sign(tokenPayload, config_1.default.accessToken_secret, { expiresIn: Number(config_1.default.accessToken_expiresIn) });
+    return {
+        accessToken
+    };
+});
 const createUserIntoDb = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.userModel.create(payload);
     return result;
@@ -37,5 +63,5 @@ const getAllContactFromDb = () => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.userService = {
     createUserIntoDb, contactIntoDb, deleteUserIntoDb,
-    getAllUsersFromDb, contactDeleteIntoDb, getAllContactFromDb
+    getAllUsersFromDb, contactDeleteIntoDb, getAllContactFromDb, loginUser
 };

@@ -5,7 +5,12 @@ import { IProject } from './project.interface';
 
 
 const projectSchema = new Schema<IProject>({
-
+  projectId: {
+    type: String,
+    required: true,
+    unique: true,
+    maxlength: [10, 'Project ID must be less than 10 characters'],
+  },
   projectName: {
     type: String,
     required: true,
@@ -20,6 +25,16 @@ const projectSchema = new Schema<IProject>({
     type: [String],
     required: true,
     validate: [(val: string[]) => val.length > 0, 'At least one feature is required'],
+  },
+  myLearnings: {
+    type: [String],
+    required: true,
+    validate: [(val: string[]) => val.length > 0, 'At least one My learning  is required'],
+  },
+  techStack: {
+    type: [String],
+    required: true,
+    validate: [(val: string[]) => val.length > 0, 'At least one Tech stack is required'],
   },
   githubClientCode: {
     type: String,

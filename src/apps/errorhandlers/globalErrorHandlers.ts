@@ -80,7 +80,7 @@ const GlobalErrorHandlers = (
     error: { details: err },
   });
 
-  next();
+
 };
 
 export default GlobalErrorHandlers as unknown as express.ErrorRequestHandler;

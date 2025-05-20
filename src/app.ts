@@ -9,11 +9,13 @@ import { userRouter } from './apps/modules/user/user.routes'
 
 const app = express()
 app.use(cors({
-  origin: "https://next-portfolio-personal-blog-frontend.vercel.app"
+  origin: [
+    "https://next-portfolio-personal-blog-frontend.vercel.app",
+    "http://localhost:3000"
+  ]
 }));
+
 app.use(express.json())
-
-
 app.use('/api/user', userRouter)
 app.use('/api/blogs', blogRoutes)
 app.use('/api/projects', ProjectRoutes)

@@ -24,6 +24,15 @@ const createUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
         data: result,
     });
 }));
+const loginUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_service_1.userService.loginUser(req.body);
+    res.json({
+        success: true,
+        message: 'User logged in successfully',
+        statusCode: 200,
+        data: result,
+    });
+}));
 const createContact = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_service_1.userService.contactIntoDb(req.body);
     res.json({
@@ -71,5 +80,5 @@ const getAllContact = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
 }));
 exports.userController = {
     createUser, deleteUser,
-    getAllUser, createContact, deleteContact, getAllContact
+    getAllUser, createContact, deleteContact, getAllContact, loginUser
 };

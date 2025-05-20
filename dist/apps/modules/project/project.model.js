@@ -35,6 +35,12 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
 const projectSchema = new mongoose_1.Schema({
+    projectId: {
+        type: String,
+        required: true,
+        unique: true,
+        maxlength: [10, 'Project ID must be less than 10 characters'],
+    },
     projectName: {
         type: String,
         required: true,
@@ -49,6 +55,16 @@ const projectSchema = new mongoose_1.Schema({
         type: [String],
         required: true,
         validate: [(val) => val.length > 0, 'At least one feature is required'],
+    },
+    myLearnings: {
+        type: [String],
+        required: true,
+        validate: [(val) => val.length > 0, 'At least one My learning  is required'],
+    },
+    techStack: {
+        type: [String],
+        required: true,
+        validate: [(val) => val.length > 0, 'At least one Tech stack is required'],
     },
     githubClientCode: {
         type: String,

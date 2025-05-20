@@ -12,7 +12,10 @@ const project_routes_1 = require("./apps/modules/project/project.routes");
 const user_routes_1 = require("./apps/modules/user/user.routes");
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
-    origin: "https://next-portfolio-personal-blog-frontend.vercel.app"
+    origin: [
+        "https://next-portfolio-personal-blog-frontend.vercel.app",
+        "http://localhost:3000"
+    ]
 }));
 app.use(express_1.default.json());
 app.use('/api/user', user_routes_1.userRouter);

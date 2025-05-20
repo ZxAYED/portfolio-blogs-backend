@@ -16,7 +16,9 @@ exports.projectController = void 0;
 const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
 const project_service_1 = require("./project.service");
 const createProject = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("ei page a ashei na controller");
     const result = yield project_service_1.ProjectService.createProjectIntoDb(req.file, req.body);
+    console.log("🚀 ~ createProject controller ~ result:", req.file, req.body);
     res.json({
         success: true,
         message: 'Project created successfully',
@@ -33,11 +35,11 @@ const getAllProjects = (0, catchAsync_1.default)((req, res) => __awaiter(void 0,
         data: result,
     });
 }));
-const getSingleProjects = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield project_service_1.ProjectService.getSingleProjectsFromDb(req.params.id);
+const getSingleProject = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield project_service_1.ProjectService.getSingleProjectFromDb(req.params.id);
     res.json({
         success: true,
-        message: 'Project  retrieved successfully',
+        message: 'Project retrieved successfully',
         statusCode: 200,
         data: result,
     });
@@ -63,7 +65,7 @@ const deleteProject = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
 exports.projectController = {
     createProject,
     getAllProjects,
-    getSingleProjects,
+    getSingleProject,
     updateProjects,
     deleteProject,
 };

@@ -68,6 +68,5 @@ const GlobalErrorHandlers = (err, req, res, next) => {
         stack: err.stack || 'No stack available',
         error: { details: err },
     });
-    next();
 };
 exports.default = GlobalErrorHandlers;
