@@ -13,7 +13,9 @@ cloudinary.v2.config({
 const UploadImageToCloudinary = async (imageName: string, fileBuffer: Buffer) => {
     return new Promise<{ message: string; url: string }>((resolve, reject) => {
         const uploadStream = cloudinary.v2.uploader.upload_stream(
-            { public_id: imageName.trim() },
+            { public_id: imageName.trim(),
+                folder:'next-portfolio'
+             },
             (error, result) => {
                 if (error) {
                     reject(new AppError(500, 'Error uploading image to Cloudinary'));

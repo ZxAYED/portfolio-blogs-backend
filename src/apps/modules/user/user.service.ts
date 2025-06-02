@@ -9,10 +9,10 @@ import AppError from "../../Errorhandlers/AppError";
 
 
 const loginUser = async (data: { email: string; password: string }) => {
-
   const email = data.email.toLowerCase();
   const userData = await userModel.findOne({ email });
 
+  
   if (!userData) {
     throw new AppError(404, "User not found!");
   }
@@ -39,6 +39,7 @@ const loginUser = async (data: { email: string; password: string }) => {
     accessToken
   };
 };
+
 
 const createUserIntoDb = async (payload: IUser) => {
   const result = await userModel.create(payload)

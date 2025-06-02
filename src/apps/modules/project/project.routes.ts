@@ -17,7 +17,7 @@ router.post(
   (req: Request, res: Response, next: NextFunction) => {
     const parsedData = JSON.parse(req.body.data);
     req.body = projectValidation.createProjectSchema.parse(parsedData);
-    console.log("🚀 ~ req.body:", req.body)
+  
     return projectController.createProject(req, res, next);
   },
 )

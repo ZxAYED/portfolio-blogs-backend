@@ -5,13 +5,12 @@ import { ProjectService } from './project.service';
 
 
 const createProject = catchAsync(async (req, res) => {
-  console.log("ei page a ashei na controller")
+
   const result = await ProjectService.createProjectIntoDb(
     req.file,
     req.body,
   )
-  console.log("🚀 ~ createProject controller ~ result:",  req.file,
-    req.body,)
+
   res.json({
     success: true,
     message: 'Project created successfully',

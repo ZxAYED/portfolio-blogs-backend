@@ -13,7 +13,6 @@ const router = express_1.default.Router();
 router.post('/', multer_config_1.default.single('file'), (req, res, next) => {
     const parsedData = JSON.parse(req.body.data);
     req.body = project_validation_1.projectValidation.createProjectSchema.parse(parsedData);
-    console.log("🚀 ~ req.body:", req.body);
     return project_controller_1.projectController.createProject(req, res, next);
 });
 router.get('/', project_controller_1.projectController.getAllProjects);
