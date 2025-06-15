@@ -29,6 +29,15 @@ const createContact = catchAsync(async (req, res) => {
     data: result,
   })
 })
+const SendMail = catchAsync(async (req, res) => {
+  const result = await userService.SendMail(req.body)
+  res.json({
+    success: true,
+    message: 'Mail sent successfully',
+    statusCode: 200,
+    data: result,
+  })
+})
 const deleteContact = catchAsync(async (req, res) => {
   const result = await userService.contactDeleteIntoDb(req.params.id)
   res.json({
@@ -68,5 +77,5 @@ const getAllContact = catchAsync(async (req, res) => {
 
 export const userController = {
   createUser, deleteUser,
-  getAllUser, createContact, deleteContact, getAllContact,loginUser
+  getAllUser, createContact, deleteContact, getAllContact,loginUser,SendMail
 }

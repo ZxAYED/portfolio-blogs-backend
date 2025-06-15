@@ -42,6 +42,15 @@ const createContact = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
         data: result,
     });
 }));
+const SendMail = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_service_1.userService.SendMail(req.body);
+    res.json({
+        success: true,
+        message: 'Mail sent successfully',
+        statusCode: 200,
+        data: result,
+    });
+}));
 const deleteContact = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_service_1.userService.contactDeleteIntoDb(req.params.id);
     res.json({
@@ -80,5 +89,5 @@ const getAllContact = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
 }));
 exports.userController = {
     createUser, deleteUser,
-    getAllUser, createContact, deleteContact, getAllContact, loginUser
+    getAllUser, createContact, deleteContact, getAllContact, loginUser, SendMail
 };

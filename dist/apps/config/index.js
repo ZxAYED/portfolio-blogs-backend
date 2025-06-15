@@ -17,5 +17,7 @@ exports.default = {
     cloudinary_api_key: process.env.CLOUDINARY_API_KEY,
     cloudinary_api_secret: process.env.CLOUDINARY_API_SECRET,
     accessToken_secret: process.env.ACCESS_TOKEN_SECRET,
-    accessToken_expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN
+    accessToken_expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN,
+    app_password: process.env.APP_PASSWORD,
+    app_gmail: process.env.APP_GMAIL,
 };

@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userService = void 0;
 const user_model_1 = require("./user.model");
+const nodemailer_1 = __importDefault(require("nodemailer"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const config_1 = __importDefault(require("../../config"));
 const AppError_1 = __importDefault(require("../../Errorhandlers/AppError"));
@@ -53,6 +54,36 @@ const contactDeleteIntoDb = (payload) => __awaiter(void 0, void 0, void 0, funct
     const result = yield user_model_1.contactModel.findByIdAndDelete(payload);
     return result;
 });
+const SendMail = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { name, email, message } = payload;
+        if (!name || !email || !message) {
+            throw new AppError_1.default(400, "All fields are required!");
+        }
+        const transporter = nodemailer_1.default.createTransport({
+            service: "gmail",
+            auth: {
+                user: config_1.default.app_gmail,
+                pass: config_1.default.app_password,
+            },
+        });
+        const mailOptions = {
+            from: email,
+            to: 'zzayediqbalofficial@gmail.com',
+            subject: `New Contact Message from ${name}`,
+            text: `You received a message from ${name} (${email}):\n\n${message}`,
+        };
+        yield transporter.sendMail(mailOptions);
+        return {
+            success: true,
+            message: "Email sent successfully"
+        };
+    }
+    catch (error) {
+        console.error("Error sending email:", error);
+        throw new AppError_1.default(500, "Failed to send email. Please try again later.");
+    }
+});
 const getAllUsersFromDb = () => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.userModel.find();
     return result;
@@ -63,5 +94,5 @@ const getAllContactFromDb = () => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.userService = {
     createUserIntoDb, contactIntoDb, deleteUserIntoDb,
-    getAllUsersFromDb, contactDeleteIntoDb, getAllContactFromDb, loginUser
+    getAllUsersFromDb, contactDeleteIntoDb, getAllContactFromDb, loginUser, SendMail
 };
