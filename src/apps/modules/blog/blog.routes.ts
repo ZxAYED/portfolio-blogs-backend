@@ -14,15 +14,18 @@ declare module 'express-serve-static-core' {
 }
 router.post(
 
-  '/', upload.single('imageUrl'),
+  '/', upload.single('file'),
   (req, res, next) => {
     if (!req.body || !req.file) {
       return next(new AppError(400, 'Missing required fields or file'));
     }
-    req.body.imageUrl = req.file;
+
+    const parsedData = JSON.parse(req.body.data);
+    req.body = blogValidation.createBlogSchema.parse(parsedData),
+      req.body.imageUrl = req.file;
     next();
   },
-  validateRequest(blogValidation.createBlogSchema),
+
 
   blogController.createBlog,
 )

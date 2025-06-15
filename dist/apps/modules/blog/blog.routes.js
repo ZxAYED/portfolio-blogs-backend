@@ -11,13 +11,15 @@ const multer_config_1 = __importDefault(require("../../utils/multer.config"));
 const blog_controller_1 = require("./blog.controller");
 const blog_validation_1 = require("./blog.validation");
 const router = express_1.default.Router();
-router.post('/', multer_config_1.default.single('imageUrl'), (req, res, next) => {
+router.post('/', multer_config_1.default.single('file'), (req, res, next) => {
     if (!req.body || !req.file) {
         return next(new AppError_1.default(400, 'Missing required fields or file'));
     }
-    req.body.imageUrl = req.file;
+    const parsedData = JSON.parse(req.body.data);
+    req.body = blog_validation_1.blogValidation.createBlogSchema.parse(parsedData),
+        req.body.imageUrl = req.file;
     next();
-}, (0, validateRequest_1.default)(blog_validation_1.blogValidation.createBlogSchema), blog_controller_1.blogController.createBlog);
+}, blog_controller_1.blogController.createBlog);
 router.get('/', blog_controller_1.blogController.getAllBlogs);
 router.get('/:id', blog_controller_1.blogController.getSingleBlog);
 router.patch('/:id', (0, validateRequest_1.default)(blog_validation_1.blogValidation.updateBlogSchema), blog_controller_1.blogController.updateblogs);
