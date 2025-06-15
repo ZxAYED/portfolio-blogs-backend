@@ -1,6 +1,6 @@
 import { IContact, IUser } from './user.interface';
 import { contactModel, userModel } from './user.model';
-
+import nodemailer from "nodemailer"
 import jwt from "jsonwebtoken";
 import config from "../../config";
 import AppError from "../../Errorhandlers/AppError";
@@ -12,7 +12,7 @@ const loginUser = async (data: { email: string; password: string }) => {
   const email = data.email.toLowerCase();
   const userData = await userModel.findOne({ email });
 
-  
+
   if (!userData) {
     throw new AppError(404, "User not found!");
   }
@@ -32,7 +32,7 @@ const loginUser = async (data: { email: string; password: string }) => {
   const accessToken = jwt.sign(
     tokenPayload,
     config.accessToken_secret as string,
-    { expiresIn:Number( config.accessToken_expiresIn) }
+    { expiresIn: Number(config.accessToken_expiresIn) }
   );
 
   return {
@@ -59,6 +59,40 @@ const contactDeleteIntoDb = async (payload: string) => {
   return result
 }
 
+const SendMail = async (payload: { name: string, email: string, message: string }) => {
+  try {
+    const { name, email, message } = payload;
+    if (!name || !email || !message) {
+      throw new AppError(400, "All fields are required!");
+    }
+     const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: config.app_gmail,
+        pass: config.app_password,
+      },
+    });
+    const mailOptions = {
+      from: email,
+      to:'zzayediqbalofficial@gmail.com',
+      subject: `New Contact Message from ${name}`,
+      text: `You received a message from ${name} (${email}):\n\n${message}`,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+
+    return {
+      success: true,
+      message: "Email sent successfully"
+    }
+  } catch (error) {
+    console.error("Error sending email:", error);
+    throw new AppError(500, "Failed to send email. Please try again later.");
+
+  }
+}
+
 const getAllUsersFromDb = async () => {
   const result = await userModel.find()
   return result
@@ -72,5 +106,5 @@ const getAllContactFromDb = async () => {
 
 export const userService = {
   createUserIntoDb, contactIntoDb, deleteUserIntoDb,
-  getAllUsersFromDb, contactDeleteIntoDb, getAllContactFromDb,loginUser
+  getAllUsersFromDb, contactDeleteIntoDb, getAllContactFromDb, loginUser, SendMail
 }

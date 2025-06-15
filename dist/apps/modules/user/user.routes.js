@@ -10,6 +10,7 @@ const router = express_1.default.Router();
 router.post('/', user_controller_1.userController.createUser);
 router.post('/login', user_controller_1.userController.loginUser);
 router.post('/contact', user_controller_1.userController.createContact);
+router.post('/send-mail', user_controller_1.userController.SendMail);
 router.get('/', user_controller_1.userController.getAllUser);
 router.get('/contact', user_controller_1.userController.getAllContact);
 router.delete('/contact/:id', user_controller_1.userController.deleteContact);
